@@ -12,6 +12,18 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::group(['namespace' => 'Main'], function () {
         Route::get('/', [App\Http\Controllers\Admin\Main\IndexController::class, '__invoke']);
     });
+
+    Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
+        Route::get('/', [App\Http\Controllers\Admin\Post\IndexController::class, '__invoke'])->name('admin.posts.index');
+        Route::get('/create', [App\Http\Controllers\Admin\Post\CreateController::class, '__invoke'])->name('admin.posts.create');
+        Route::post('/', [App\Http\Controllers\Admin\Post\StoreController::class, '__invoke'])->name('admin.posts.store');
+        Route::get('/{post}', [App\Http\Controllers\Admin\Post\ShowController::class, '__invoke'])->name('admin.posts.show');
+        Route::get('/{post}/edit', [App\Http\Controllers\Admin\Post\EditController::class, '__invoke'])->name('admin.posts.edit');
+        Route::patch('/{post}', [App\Http\Controllers\Admin\Post\UpdateController::class, '__invoke'])->name('admin.posts.update');
+        Route::delete('/{post}', [App\Http\Controllers\Admin\Post\DeleteController::class, '__invoke'])->name('admin.posts.delete');
+
+    });
+
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
         Route::get('/', [App\Http\Controllers\Admin\Category\IndexController::class, '__invoke'])->name('admin.categories.index');
         Route::get('/create', [App\Http\Controllers\Admin\Category\CreateController::class, '__invoke'])->name('admin.categories.create');
