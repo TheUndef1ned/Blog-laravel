@@ -40,7 +40,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Edit</th>
+                                        <th colspan="3" class="text-center">Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -49,7 +49,16 @@
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->title }}</td>
                                         <td><a href="{{ route('admin.categories.show', $category->id) }}" class="far fa-eye"></a></td>
-                                    </tr>
+                                        <td><a href="{{ route('admin.categories.edit', $category->id) }}"  class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
+                                        <td>
+                                            <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="border-0 bg-transparent">
+                                                    <i class="fas fa-trash text-danger" role="button"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tbody>
                                     @endforeach
                                 </table>
